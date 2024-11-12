@@ -32,7 +32,7 @@ SearchLight.Validation.validator(::Type{Todo}) = ModelValidator([
 function search(; completed = false, startdate = today() - Month(1), enddate = today(), group = ["date"], user_id)
   filters = SQLWhereEntity[
       SQLWhereExpression("completed = ?", completed),
-      SQLWhereExpression("date >= ? AND date <= ?", startdate, enddate),
+      SQLWhereExpression("date BETWEEN '?' AND '?'", startdate, enddate),
       SQLWhereExpression("user_id = ?", user_id)
   ]
 
